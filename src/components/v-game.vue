@@ -1,0 +1,228 @@
+<template>
+    <div id="header">
+        <img class="blueSoul" src="../assets/blueSoul.png" alt="">
+        <h1>Soulsdle</h1>
+        <img class="blueSoul" src="../assets/blueSoul.png" alt="">
+    </div>
+    <hr>
+    <div id="contents">
+        <div id="board"></div>
+        <div id="kb">
+            <div class="row1">
+                <button class="kb-button">q</button>
+                <button class="kb-button">w</button>
+                <button class="kb-button">e</button>
+                <button class="kb-button">r</button>
+                <button class="kb-button">t</button>
+                <button class="kb-button">y</button>
+                <button class="kb-button">u</button>
+                <button class="kb-button">i</button>
+                <button class="kb-button">o</button>
+                <button class="kb-button">p</button>
+            </div>
+            <div class="row2">
+                <button class="kb-button">a</button>
+                <button class="kb-button">s</button>
+                <button class="kb-button">d</button>
+                <button class="kb-button">f</button>
+                <button class="kb-button">g</button>
+                <button class="kb-button">h</button>
+                <button class="kb-button">j</button>
+                <button class="kb-button">k</button>
+                <button class="kb-button">l</button>
+            </div>
+            <div class="row3">
+                <button class="kb-button">Del</button>
+                <button class="kb-button">z</button>
+                <button class="kb-button">x</button>
+                <button class="kb-button">c</button>
+                <button class="kb-button">v</button>
+                <button class="kb-button">b</button>
+                <button class="kb-button">n</button>
+                <button class="kb-button">m</button>
+                <button class="kb-button">Enter</button>
+            </div>
+        </div>
+    </div>
+</template>
+
+<style src="./styles.css"></style>
+
+<script>
+export default {
+    name: 'v-game',
+    data() {
+        return {
+            tries: 6,
+            words: [],
+            triesRemaining: 6,
+            currentTry: [],
+            nextLetter: 0,
+            pressedKey: '',
+            answer: ''
+        }
+    },
+    methods: {
+        insertLetter(pressedKey) {
+            if (this.nextLetter === 5) {
+                return
+            }
+            pressedKey = pressedKey.toLowerCase()
+            let row = document.getElementsByClassName("letter-row")[6 - this.triesRemaining]
+            let box = row.children[this.nextLetter]
+            box.textContent = pressedKey
+            box.classList.add("filled-box")
+            this.currentTry.push(pressedKey)
+            this.nextLetter += 1
+        },
+        deleteLetter() {
+            let row = document.getElementsByClassName("letter-row")[6 - this.triesRemaining]
+            let box = row.children[this.nextLetter - 1]
+            box.textContent = ""
+            box.classList.remove("filled-box")
+            this.currentTry.pop()
+            this.nextLetter -= 1
+        },
+        shadeKeyBoard(letter, color) {
+            for (const elem of document.getElementsByClassName("kb-button")) {
+                if (elem.textContent === letter) {
+                    let oldColor = elem.style.backgroundColor
+                    if (oldColor === 'green') {
+                        return
+                    }
+
+                    if (oldColor === 'yellow' && color !== 'green') {
+                        return
+                    }
+
+                    elem.style.backgroundColor = color
+                    break
+                }
+            }
+        },
+        checkGuess() {
+            let row = document.getElementsByClassName("letter-row")[6 - this.triesRemaining]
+            let guessString = ''
+            let rightGuess = Array.from(this.answer)
+
+            for (const val of this.currentTry) {
+                guessString += val
+            }
+
+            if (guessString.length != 5) {
+                alert("Only 5 letter words")
+                return
+            }
+
+            if (!this.words.includes(guessString)) {
+                alert("Word not found!")
+                return
+            }
+
+            for (let i = 0; i < 5; i++) {
+                let letterColor = ''
+                let box = row.children[i]
+                let letter = this.currentTry[i]
+                let letterPosition = rightGuess.indexOf(this.currentTry[i])
+                if (letterPosition === -1) {
+                    letterColor = 'grey'
+                } else {
+                    if (this.currentTry[i] === rightGuess[i]) {
+                        letterColor = 'green'
+                    } else {
+                        letterColor = 'yellow'
+                    }
+
+                    rightGuess[letterPosition] = "#"
+                }
+
+                let delay = 250 * i
+                setTimeout(() => {
+                    //shade box
+                    box.style.backgroundColor = letterColor
+                    this.shadeKeyBoard(letter, letterColor)
+                }, delay)
+            }
+
+            if (guessString === this.answer) {
+                alert("You guessed right! Game over!")
+                this.triesRemaining = 0
+                return
+            } else {
+                this.triesRemaining -= 1;
+                this.currentTry = [];
+                this.nextLetter = 0;
+
+                if (this.triesRemaining === 0) {
+                    alert("You've run out of guesses! Game over!")
+                    alert(`The right word was: "${this.answer}"`)
+                }
+            }
+        }
+    },
+    mounted() {
+        let board = document.getElementById("board");
+        for (let i = 0; i < this.tries; i++) {
+            let row = document.createElement("div")
+            row.className = "letter-row"
+            for (let j = 0; j < 5; j++) {
+                let box = document.createElement("div")
+                box.className = "letter-box"
+                row.appendChild(box)
+            }
+            board.appendChild(row)
+        }
+        this.words = 
+            ['demon', 'selen', 'yuria', 'freke', 'doran', 'blige', 'biorr', 'andre', 'logan', 'giant', 'witch',
+            'gough', 'carim', 'swamp', 'souls', 'oscar', 'shiva', 'vamos', 'velka', 'vince', 'yulva',
+            'drake', 'aldia', 'curse', 'ashen', 'alken', 'lords', 'tillo', 'grave', 'licia', 'eleum', 'loyce',
+            'ashes', 'sword', 'yhorm', 'slave', 'shira', 'queen', 'pygmy', 'karla', 'irina', 'havel', 'drang', 'eygon', 'kamui',
+            'yurie', 'viola', 'valtr', 'simon', 'jozef', 'blood', 'antal', 'dores', 'edgar', 'maria', 'mergo', 'oedon',
+            'vitus', 'djura', 'shura', 'tengu', 'ensha', 'elden', 'beast', 'crone', 'morne', 'okina', 'albus',
+            'pidia', 'lusat', 'order', 'ranni', 'gowry', 'ofnir', 'thops', 'trina', 'rosus', 'varre', 'golem',
+            'flame', 'manus', 'estoc', 'spear', 'iaito', 'chaos', 'abyss', 'blade', 'knife', 'grant', 'londo',
+            'chasm', 'amana', 'crypt', 'ihyll', 'loran', 'dream', 'ruins', 'renna', 'altus', 'tower', 'human',
+            'farum', 'azula', 'irith', 'elleh', 'faith', 'poise', 'bleed', 'magic', 'skill', 'crown', 'scale',
+            'arrow', 'death', 'steel', 'favor', 'light', 'raime', 'royal', 'heide', 'thief', 'rogue', 'estus'];
+        this.answer = this.words[Math.floor(Math.random() * this.words.length)];
+        document.addEventListener("keyup", (e) => {
+            if (this.triesRemaining === 0) {
+                return
+            }
+            this.pressedKey = String(e.key)
+            if (this.pressedKey === "Backspace" && this.nextLetter !== 0) {
+                this.deleteLetter()
+                return
+            }
+
+            if (this.pressedKey === "Enter") {
+                this.checkGuess()
+                return
+            }
+
+            let found = this.pressedKey.match(/[a-z]/gi)
+            if (!found || found.length > 1) {
+                return
+            } else {
+                this.insertLetter(this.pressedKey)
+            }
+        })
+
+        document.getElementById("kb").addEventListener("click", (e) => {
+            const target = e.target
+
+            if (!target.classList.contains("kb-button")) {
+                return
+            }
+            let key = target.textContent
+
+            if (key === "Del") {
+                key = "Backspace"
+            }
+
+            document.dispatchEvent(new KeyboardEvent("keyup", { 'key': key }))
+        })
+        
+    }
+}
+</script>
