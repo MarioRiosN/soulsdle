@@ -63,7 +63,7 @@ export default {
         }
     },
     methods: {
-        insertLetter(pressedKey) {
+        add(pressedKey) {
             if (this.nextLetter === 5) {
                 return
             }
@@ -75,7 +75,7 @@ export default {
             this.currentTry.push(pressedKey)
             this.nextLetter += 1
         },
-        deleteLetter() {
+        del() {
             let row = document.getElementsByClassName("letter-row")[6 - this.triesRemaining]
             let box = row.children[this.nextLetter - 1]
             box.textContent = ""
@@ -90,17 +90,15 @@ export default {
                     if (oldColor === 'green') {
                         return
                     }
-
                     if (oldColor === 'yellow' && color !== 'green') {
                         return
                     }
-
                     elem.style.backgroundColor = color
                     break
                 }
             }
         },
-        checkGuess() {
+        check() {
             let row = document.getElementsByClassName("letter-row")[6 - this.triesRemaining]
             let guessString = ''
             let rightGuess = Array.from(this.answer)
@@ -191,12 +189,12 @@ export default {
             }
             this.pressedKey = String(e.key)
             if (this.pressedKey === "Backspace" && this.nextLetter !== 0) {
-                this.deleteLetter()
+                this.del()
                 return
             }
 
             if (this.pressedKey === "Enter") {
-                this.checkGuess()
+                this.check()
                 return
             }
 
@@ -204,7 +202,7 @@ export default {
             if (!found || found.length > 1) {
                 return
             } else {
-                this.insertLetter(this.pressedKey)
+                this.add(this.pressedKey)
             }
         })
 
