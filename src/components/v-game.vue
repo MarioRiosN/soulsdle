@@ -65,7 +65,7 @@ export default {
     methods: {
         add(pressedKey) {
             if (this.nextLetter === 5) {
-                return
+                return 0;
             }
             pressedKey = pressedKey.toLowerCase()
             let row = document.getElementsByClassName("letter-row")[6 - this.triesRemaining]
@@ -88,10 +88,10 @@ export default {
                 if (elem.textContent === letter) {
                     let oldColor = elem.style.backgroundColor
                     if (oldColor === 'green') {
-                        return
+                        return 0
                     }
                     if (oldColor === 'yellow' && color !== 'green') {
-                        return
+                        return 0
                     }
                     elem.style.backgroundColor = color
                     break
@@ -109,12 +109,12 @@ export default {
 
             if (guessString.length != 5) {
                 alert("Only 5 letter words")
-                return
+                return 0
             }
 
             if (!this.words.includes(guessString)) {
                 alert("Word not found!")
-                return
+                return 0
             }
 
             for (let i = 0; i < 5; i++) {
@@ -145,7 +145,7 @@ export default {
             if (guessString === this.answer) {
                 alert("You guessed the word!")
                 this.triesRemaining = 0
-                return
+                return 0
             } else {
                 this.triesRemaining -= 1;
                 this.currentTry = [];
@@ -184,22 +184,22 @@ export default {
         this.answer = this.words[Math.floor(Math.random() * this.words.length)];
         document.addEventListener("keyup", (e) => {
             if (this.triesRemaining === 0) {
-                return
+                return 0
             }
             this.pressedKey = String(e.key)
             if (this.pressedKey === "Backspace" && this.nextLetter !== 0) {
                 this.del()
-                return
+                return 0
             }
 
             if (this.pressedKey === "Enter") {
                 this.check()
-                return
+                return 0
             }
 
             let found = this.pressedKey.match(/[a-z]/gi)
             if (!found || found.length > 1) {
-                return
+                return 0
             } else {
                 this.add(this.pressedKey)
             }
@@ -209,7 +209,7 @@ export default {
             const target = e.target
 
             if (!target.classList.contains("kb-button")) {
-                return
+                return 0
             }
             let key = target.textContent
 
