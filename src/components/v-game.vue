@@ -143,7 +143,7 @@ export default {
             }
 
             if (guessString === this.answer) {
-                alert("You guessed right! Game over!")
+                alert("You guessed the word!")
                 this.triesRemaining = 0
                 return
             } else {
@@ -152,8 +152,7 @@ export default {
                 this.nextLetter = 0;
 
                 if (this.triesRemaining === 0) {
-                    alert("You've run out of guesses! Game over!")
-                    alert(`The right word was: "${this.answer}"`)
+                    alert(`Out of attemps. The answer was: "${this.answer}"`)
                 }
             }
         }
@@ -170,18 +169,18 @@ export default {
             }
             board.appendChild(row)
         }
-        this.words = 
+        this.words =
             ['demon', 'selen', 'yuria', 'freke', 'doran', 'blige', 'biorr', 'andre', 'logan', 'giant', 'witch',
-            'gough', 'carim', 'swamp', 'souls', 'oscar', 'shiva', 'vamos', 'velka', 'vince', 'yulva',
-            'drake', 'aldia', 'curse', 'ashen', 'alken', 'lords', 'tillo', 'grave', 'licia', 'eleum', 'loyce',
-            'ashes', 'sword', 'yhorm', 'slave', 'shira', 'queen', 'pygmy', 'karla', 'irina', 'havel', 'drang', 'eygon', 'kamui',
-            'yurie', 'viola', 'valtr', 'simon', 'jozef', 'blood', 'antal', 'dores', 'edgar', 'maria', 'mergo', 'oedon',
-            'vitus', 'djura', 'shura', 'tengu', 'ensha', 'elden', 'beast', 'crone', 'morne', 'okina', 'albus',
-            'pidia', 'lusat', 'order', 'ranni', 'gowry', 'ofnir', 'thops', 'trina', 'rosus', 'varre', 'golem',
-            'flame', 'manus', 'estoc', 'spear', 'iaito', 'chaos', 'abyss', 'blade', 'knife', 'grant', 'londo',
-            'chasm', 'amana', 'crypt', 'ihyll', 'loran', 'dream', 'ruins', 'renna', 'altus', 'tower', 'human',
-            'farum', 'azula', 'irith', 'elleh', 'faith', 'poise', 'bleed', 'magic', 'skill', 'crown', 'scale',
-            'arrow', 'death', 'steel', 'favor', 'light', 'raime', 'royal', 'heide', 'thief', 'rogue', 'estus'];
+                'gough', 'carim', 'swamp', 'souls', 'oscar', 'shiva', 'vamos', 'velka', 'vince', 'yulva',
+                'drake', 'aldia', 'curse', 'ashen', 'alken', 'lords', 'tillo', 'grave', 'licia', 'eleum', 'loyce',
+                'ashes', 'sword', 'yhorm', 'slave', 'shira', 'queen', 'pygmy', 'karla', 'irina', 'havel', 'drang', 'eygon', 'kamui',
+                'yurie', 'viola', 'valtr', 'simon', 'jozef', 'blood', 'antal', 'dores', 'edgar', 'maria', 'mergo', 'oedon',
+                'vitus', 'djura', 'shura', 'tengu', 'ensha', 'elden', 'beast', 'crone', 'morne', 'okina', 'albus',
+                'pidia', 'lusat', 'order', 'ranni', 'gowry', 'ofnir', 'thops', 'trina', 'rosus', 'varre', 'golem',
+                'flame', 'manus', 'estoc', 'spear', 'iaito', 'chaos', 'abyss', 'blade', 'knife', 'grant', 'londo',
+                'chasm', 'amana', 'crypt', 'ihyll', 'loran', 'dream', 'ruins', 'renna', 'altus', 'tower', 'human',
+                'farum', 'azula', 'irith', 'elleh', 'faith', 'poise', 'bleed', 'magic', 'skill', 'crown', 'scale',
+                'arrow', 'death', 'steel', 'favor', 'light', 'raime', 'royal', 'heide', 'thief', 'rogue', 'estus'];
         this.answer = this.words[Math.floor(Math.random() * this.words.length)];
         document.addEventListener("keyup", (e) => {
             if (this.triesRemaining === 0) {
@@ -220,7 +219,7 @@ export default {
 
             document.dispatchEvent(new KeyboardEvent("keyup", { 'key': key }))
         })
-        
+
     }
 }
 </script>
