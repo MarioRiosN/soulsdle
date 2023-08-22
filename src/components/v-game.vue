@@ -67,92 +67,83 @@ export default {
             if (this.nextLetter === 5) {
                 return 0;
             }
-            pressedKey = pressedKey.toLowerCase()
-            let row = document.getElementsByClassName("letter-row")[6 - this.triesRemaining]
-            let box = row.children[this.nextLetter]
-            box.textContent = pressedKey
-            box.classList.add("filled-box")
-            this.currentTry.push(pressedKey)
-            this.nextLetter += 1
+            pressedKey = pressedKey.toLowerCase();
+            let row = document.getElementsByClassName("letter-row")[6 - this.triesRemaining];
+            let box = row.children[this.nextLetter];
+            box.textContent = pressedKey;
+            box.classList.add("filled-box");
+            this.currentTry.push(pressedKey);
+            this.nextLetter += 1;
         },
         del() {
-            let row = document.getElementsByClassName("letter-row")[6 - this.triesRemaining]
-            let box = row.children[this.nextLetter - 1]
-            box.textContent = ""
-            box.classList.remove("filled-box")
-            this.currentTry.pop()
-            this.nextLetter -= 1
+            let row = document.getElementsByClassName("letter-row")[6 - this.triesRemaining];
+            let box = row.children[this.nextLetter - 1];
+            box.textContent = "";
+            box.classList.remove("filled-box");
+            this.currentTry.pop();
+            this.nextLetter -= 1;
         },
         shadeKeyBoard(letter, color) {
             for (const elem of document.getElementsByClassName("kb-button")) {
                 if (elem.textContent === letter) {
-                    let oldColor = elem.style.backgroundColor
+                    let oldColor = elem.style.backgroundColor;
                     if (oldColor === 'green') {
-                        return 0
+                        return 0;
                     }
                     if (oldColor === 'yellow' && color !== 'green') {
-                        return 0
+                        return 0;
                     }
-                    elem.style.backgroundColor = color
-                    break
+                    elem.style.backgroundColor = color;
+                    break;
                 }
             }
         },
         check() {
-            let row = document.getElementsByClassName("letter-row")[6 - this.triesRemaining]
-            let guessString = ''
-            let rightGuess = Array.from(this.answer)
-
+            let row = document.getElementsByClassName("letter-row")[6 - this.triesRemaining];
+            let guessString = '';
+            let rightGuess = Array.from(this.answer);
             for (const val of this.currentTry) {
-                guessString += val
+                guessString += val;
             }
-
             if (guessString.length != 5) {
-                alert("Only 5 letter words")
-                return 0
+                alert("Only 5 letter words");
+                return 0;
             }
-
             if (!this.words.includes(guessString)) {
-                alert("Word not found!")
-                return 0
+                alert("Word not found!");
+                return 0;
             }
-
             for (let i = 0; i < 5; i++) {
-                let letterColor = ''
-                let box = row.children[i]
-                let letter = this.currentTry[i]
-                let letterPosition = rightGuess.indexOf(this.currentTry[i])
+                let letterColor = '';
+                let box = row.children[i];
+                let letter = this.currentTry[i];
+                let letterPosition = rightGuess.indexOf(this.currentTry[i]);
                 if (letterPosition === -1) {
-                    letterColor = 'grey'
+                    letterColor = 'grey';
                 } else {
                     if (this.currentTry[i] === rightGuess[i]) {
-                        letterColor = 'green'
+                        letterColor = 'green';
                     } else {
-                        letterColor = 'yellow'
+                        letterColor = 'yellow';
                     }
-
-                    rightGuess[letterPosition] = "#"
+                    rightGuess[letterPosition] = "#";
                 }
-
-                let delay = 250 * i
+                let delay = 250 * i;
                 setTimeout(() => {
-                    //shade box
-                    box.style.backgroundColor = letterColor
-                    this.shadeKeyBoard(letter, letterColor)
+                    box.style.backgroundColor = letterColor;
+                    this.shadeKeyBoard(letter, letterColor);
                 }, delay)
             }
-
             if (guessString === this.answer) {
-                alert("You guessed the word!")
-                this.triesRemaining = 0
-                return 0
+                alert("You guessed the word!");
+                this.triesRemaining = 0;
+                return 0;
             } else {
                 this.triesRemaining -= 1;
                 this.currentTry = [];
                 this.nextLetter = 0;
-
                 if (this.triesRemaining === 0) {
-                    alert(`Out of attemps. The answer was: "${this.answer}"`)
+                    alert(`Out of attemps. The answer was: "${this.answer}"`);
                 }
             }
         }
@@ -160,14 +151,14 @@ export default {
     mounted() {
         let board = document.getElementById("board");
         for (let i = 0; i < this.tries; i++) {
-            let row = document.createElement("div")
-            row.className = "letter-row"
+            let row = document.createElement("div");
+            row.className = "letter-row";
             for (let j = 0; j < 5; j++) {
-                let box = document.createElement("div")
-                box.className = "letter-box"
-                row.appendChild(box)
+                let box = document.createElement("div");
+                box.className = "letter-box";
+                row.appendChild(box);
             }
-            board.appendChild(row)
+            board.appendChild(row);
         }
         this.words =
             ['demon', 'selen', 'yuria', 'freke', 'doran', 'blige', 'biorr', 'andre', 'logan', 'giant', 'witch',
@@ -184,42 +175,35 @@ export default {
         this.answer = this.words[Math.floor(Math.random() * this.words.length)];
         document.addEventListener("keyup", (e) => {
             if (this.triesRemaining === 0) {
-                return 0
+                return 0;
             }
-            this.pressedKey = String(e.key)
+            this.pressedKey = String(e.key);
             if (this.pressedKey === "Backspace" && this.nextLetter !== 0) {
-                this.del()
-                return 0
+                this.del();
+                return 0;
             }
-
             if (this.pressedKey === "Enter") {
-                this.check()
-                return 0
+                this.check();
+                return 0;
             }
-
-            let found = this.pressedKey.match(/[a-z]/gi)
+            let found = this.pressedKey.match(/[a-z]/gi);
             if (!found || found.length > 1) {
-                return 0
+                return 0;
             } else {
-                this.add(this.pressedKey)
+                this.add(this.pressedKey);
             }
         })
-
         document.getElementById("kb").addEventListener("click", (e) => {
-            const target = e.target
-
+            const target = e.target;
             if (!target.classList.contains("kb-button")) {
-                return 0
+                return 0;
             }
-            let key = target.textContent
-
+            let key = target.textContent;
             if (key === "Del") {
-                key = "Backspace"
+                key = "Backspace";
             }
-
-            document.dispatchEvent(new KeyboardEvent("keyup", { 'key': key }))
+            document.dispatchEvent(new KeyboardEvent("keyup", { 'key': key }));
         })
-
     }
 }
 </script>
