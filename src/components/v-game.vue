@@ -56,15 +56,18 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">How to play</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Understood</button>
+                    <p>You have 6 tries to guess the word. After each try, the color of the letter will show you if that letter exists in the word or not and if you placed it in the right spot.</p>
+                    <div class="letter-row"><div class="letter-box" style="background-color: green;">E</div><div class="letter-box">S</div><div class="letter-box">T</div><div class="letter-box">U</div><div class="letter-box">S</div></div>
+                    <p class="mb-3">The letter E is in the word and in the correct spot.</p>
+                    <div class="letter-row"><div class="letter-box">E</div><div class="letter-box">S</div><div class="letter-box" style="background-color: yellow;">T</div><div class="letter-box">U</div><div class="letter-box">S</div></div>
+                    <p class="mb-3">The letter T is in the word and in the incorrect spot.</p>
+                    <div class="letter-row"><div class="letter-box">E</div><div class="letter-box">S</div><div class="letter-box">T</div><div class="letter-box">U</div><div class="letter-box" style="background-color: grey;">S</div></div>
+                    <p class="mb-3">The letter S is not in the word.</p>
+                    <p class="w-100 text-center"><em>This is a From Software souls games adaptation from the word guessing game we all know and love</em></p>
                 </div>
             </div>
         </div>
@@ -193,7 +196,8 @@ export default {
                 'flame', 'manus', 'estoc', 'spear', 'iaito', 'chaos', 'abyss', 'blade', 'knife', 'grant', 'londo',
                 'chasm', 'amana', 'crypt', 'ihyll', 'loran', 'dream', 'ruins', 'renna', 'altus', 'tower', 'human',
                 'farum', 'azula', 'irith', 'elleh', 'faith', 'poise', 'bleed', 'magic', 'skill', 'crown', 'scale',
-                'arrow', 'death', 'steel', 'favor', 'light', 'raime', 'royal', 'heide', 'thief', 'rogue', 'estus'];
+                'arrow', 'death', 'steel', 'favor', 'light', 'raime', 'royal', 'heide', 'thief', 'rogue', 'estus',
+                'arena', 'armor'];
         this.answer = this.words[Math.floor(Math.random() * this.words.length)];
         document.addEventListener("keyup", (e) => {
             if (this.triesRemaining === 0) {
