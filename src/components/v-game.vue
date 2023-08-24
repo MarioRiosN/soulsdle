@@ -62,9 +62,9 @@
                 <div class="modal-body">
                     <p>You have 6 tries to guess the word. After each try, the color of the letter will show you if that letter exists in the word or not and if you placed it in the right spot.</p>
                     <div class="letter-row"><div class="letter-box" style="background-color: green;">E</div><div class="letter-box">S</div><div class="letter-box">T</div><div class="letter-box">U</div><div class="letter-box">S</div></div>
-                    <p class="mb-3">The letter E is in the word and in the correct spot.</p>
+                    <p class="mb-3">The letter E is in the word and the correct spot.</p>
                     <div class="letter-row"><div class="letter-box">E</div><div class="letter-box">S</div><div class="letter-box" style="background-color: yellow;">T</div><div class="letter-box">U</div><div class="letter-box">S</div></div>
-                    <p class="mb-3">The letter T is in the word and in the incorrect spot.</p>
+                    <p class="mb-3">The letter T is in the word but the incorrect spot.</p>
                     <div class="letter-row"><div class="letter-box">E</div><div class="letter-box">S</div><div class="letter-box">T</div><div class="letter-box">U</div><div class="letter-box" style="background-color: grey;">S</div></div>
                     <p class="mb-3">The letter S is not in the word.</p>
                     <p class="w-100 text-center"><em>This is a From Software souls games adaptation from the word guessing game we all know and love</em></p>
