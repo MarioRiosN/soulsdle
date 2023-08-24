@@ -60,18 +60,40 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>You have 6 tries to guess the word. After each try, the color of the letter will show you if that letter exists in the word or not and if you placed it in the right spot.</p>
-                    <div class="letter-row"><div class="letter-box" style="background-color: green;">E</div><div class="letter-box">S</div><div class="letter-box">T</div><div class="letter-box">U</div><div class="letter-box">S</div></div>
+                    <p>You have 6 tries to guess the word. After each try, the color of the letter will show you if that
+                        letter exists in the word or not and if you placed it in the right spot.</p>
+                    <div class="letter-row">
+                        <div class="letter-box" style="background-color: green;">E</div>
+                        <div class="letter-box">S</div>
+                        <div class="letter-box">T</div>
+                        <div class="letter-box">U</div>
+                        <div class="letter-box">S</div>
+                    </div>
                     <p class="mb-3">The letter E is in the word and the correct spot.</p>
-                    <div class="letter-row"><div class="letter-box">E</div><div class="letter-box">S</div><div class="letter-box" style="background-color: yellow;">T</div><div class="letter-box">U</div><div class="letter-box">S</div></div>
+                    <div class="letter-row">
+                        <div class="letter-box">E</div>
+                        <div class="letter-box">S</div>
+                        <div class="letter-box" style="background-color: yellow;">T</div>
+                        <div class="letter-box">U</div>
+                        <div class="letter-box">S</div>
+                    </div>
                     <p class="mb-3">The letter T is in the word but the incorrect spot.</p>
-                    <div class="letter-row"><div class="letter-box">E</div><div class="letter-box">S</div><div class="letter-box">T</div><div class="letter-box">U</div><div class="letter-box" style="background-color: grey;">S</div></div>
+                    <div class="letter-row">
+                        <div class="letter-box">E</div>
+                        <div class="letter-box">S</div>
+                        <div class="letter-box">T</div>
+                        <div class="letter-box">U</div>
+                        <div class="letter-box" style="background-color: grey;">S</div>
+                    </div>
                     <p class="mb-3">The letter S is not in the word.</p>
-                    <p class="w-100 text-center"><em>This is a From Software souls games adaptation from the word guessing game we all know and love</em></p>
+                    <p class="w-100 text-center"><em>This is a From Software souls games adaptation from the word guessing
+                            game we all know and love</em></p>
                 </div>
             </div>
         </div>
     </div>
+
+    <div id="snackbar"></div>
 </template>
 
 <style src="./styles.css"></style>
@@ -134,11 +156,17 @@ export default {
                 guessString += val;
             }
             if (guessString.length != 5) {
-                alert("Only 5 letter words");
+                let noti1 = document.getElementById("snackbar");
+                noti1.innerText = "Only 5 letter words are allowed";
+                noti1.className = "show";
+                setTimeout(function () { noti1.className = noti1.className.replace("show", ""); }, 3000);
                 return 0;
             }
             if (!this.words.includes(guessString)) {
-                alert("Word not found!");
+                var noti2 = document.getElementById("snackbar");
+                noti2.innerText = "Word not found in the list";
+                noti2.className = "show";
+                setTimeout(function () { noti2.className = noti2.className.replace("show", ""); }, 3000);
                 return 0;
             }
             for (let i = 0; i < 5; i++) {
