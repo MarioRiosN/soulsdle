@@ -1,13 +1,19 @@
 <template>
-    <div id="header">
-        <img class="blueSoul" src="../assets/blueSoul.png" alt="">
-        <h1>Soulsdle</h1>
-        <img class="blueSoul" src="../assets/blueSoul.png" alt="">
+    <div id="header" class="border-bottom border-opacity-75">
+        <div></div>
+        <div id="title">
+            <img class="blueSoul" src="../assets/blueSoul.png" alt="" style="margin-left: 50px;">
+            <h1>Soulsdle</h1>
+            <img class="blueSoul" src="../assets/blueSoul.png" alt="">
+        </div>
+        <div id="help" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <img id="helpIcon" class="img-fluid" src="../assets/question_2601675.png" alt="">
+        </div>
     </div>
-    <hr>
+    <!-- <hr> -->
     <div id="contents">
-        <div id="board"></div>
-        <div id="kb">
+        <div id="board" class="align-middle"></div>
+        <div id="kb" class="align-middle">
             <div class="row1">
                 <button class="kb-button">q</button>
                 <button class="kb-button">w</button>
@@ -41,6 +47,25 @@
                 <button class="kb-button">n</button>
                 <button class="kb-button">m</button>
                 <button class="kb-button">Enter</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div>
             </div>
         </div>
     </div>
@@ -127,12 +152,9 @@ export default {
                         letterColor = 'yellow';
                     }
                     rightGuess[letterPosition] = "#";
-                }/* 
-                let delay = 250 * i;
-                setTimeout(() => { */
-                    box.style.backgroundColor = letterColor;
-                    this.shadeKeyBoard(letter, letterColor);/* 
-                }, delay) */
+                }
+                box.style.backgroundColor = letterColor;
+                this.shadeKeyBoard(letter, letterColor);
             }
             if (guessString === this.answer) {
                 alert("You guessed the word!");
