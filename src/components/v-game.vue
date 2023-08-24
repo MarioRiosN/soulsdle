@@ -127,12 +127,12 @@ export default {
                         letterColor = 'yellow';
                     }
                     rightGuess[letterPosition] = "#";
-                }
+                }/* 
                 let delay = 250 * i;
-                setTimeout(() => {
+                setTimeout(() => { */
                     box.style.backgroundColor = letterColor;
-                    this.shadeKeyBoard(letter, letterColor);
-                }, delay)
+                    this.shadeKeyBoard(letter, letterColor);/* 
+                }, delay) */
             }
             if (guessString === this.answer) {
                 alert("You guessed the word!");
