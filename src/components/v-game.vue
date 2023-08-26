@@ -225,7 +225,7 @@ export default {
                 'chasm', 'amana', 'crypt', 'ihyll', 'loran', 'dream', 'ruins', 'renna', 'altus', 'tower', 'human',
                 'farum', 'azula', 'irith', 'elleh', 'faith', 'poise', 'bleed', 'magic', 'skill', 'crown', 'scale',
                 'arrow', 'death', 'steel', 'favor', 'light', 'raime', 'royal', 'heide', 'thief', 'rogue', 'estus',
-                'arena', 'armor'];
+                'arena', 'armor','ember'];
         this.answer = this.words[Math.floor(Math.random() * this.words.length)];
         document.addEventListener("keyup", (e) => {
             if (this.triesRemaining === 0) {
